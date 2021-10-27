@@ -9,7 +9,85 @@ send = [a,b,c]
 
 ### a=0
 リセット通信は親機から子機に送信される。
-通信を受け取ることで投票が可能になる。
+通信を受け取ることで子機は投票通信ができる
+> b:選択肢の数を送信 (2〜5の整数)
+> c:予約(機能追加時に使う現状は0で送信する)
+
+### a=1
+投票通信である。通信時に投票内容と一意の乱数を生成する。デバイスで保管する。
+リセット通信を受け取ることで送信できるようになる。
+
+> b：乱数ヘッダ 送信するタイミングで乱数を取得し、ローカル内にも保管しておく。
+> c: 投票データ リセット通信の内容に従って投票データを送信 1〜[1,2]の値
+
+### a=2
+確認通信である。子機の投票通信に付記されてる乱数ヘッダを処理が完了したら送信する。
+子機が通信を受け取り通信が完了したことを把握する。
+## 拡張機能として使用
+
+このリポジトリは、MakeCode で **拡張機能** として追加できます。
+
+* [https://makecode.microbit.org/](https://makecode.microbit.org/) を開く
+* **新しいプロジェクト** をクリックしてください
+* ギアボタンメニューの中にある **拡張機能** をクリックしてください
+* **https://github.com/drkoukichi/vote-sync** を検索してインポートします。
+
+## このプロジェクトを編集します ![ビルド ステータス バッジ](https://github.com/drkoukichi/vote-sync/workflows/MakeCode/badge.svg)
+
+MakeCode でこのリポジトリを編集します。
+
+* [https://makecode.microbit.org/](https://makecode.microbit.org/) を開く
+* **読み込む** をクリックし、 **URLから読み込む...** をクリックしてください
+* **https://github.com/drkoukichi/vote-sync** を貼り付けてインポートをクリックしてください
+
+## ブロックのプレビュー
+
+この画像はマスター内の最後のコミットからのブロックコードを示しています。
+このイメージは更新に数分かかる場合があります。
+
+![生成されたブロック](https://github.com/drkoukichi/vote-sync/raw/master/.github/makecode/blocks.png)
+
+#### メタデータ (検索、レンダリングに使用)
+
+* for PXT/microbit
+<script src="https://makecode.com/gh-pages-embed.js"></script><script>makeCodeRender("{{ site.makecode.home_url }}", "{{ site.github.owner_name }}/{{ site.github.repository_name }}");</script>
+
+> b:選択肢の数を送信 (2〜5の整数)
+> c:予約(機能追加時に使う現状は0で送信する)
+
+### a=1
+投票通信である。通信時に投票内容と一意の乱数を生成する。デバイスで保管する。
+リセット通信を受け取ることで送信できるようになる。
+
+## 拡張機能として使用
+
+このリポジトリは、MakeCode で **拡張機能** として追加できます。
+
+* [https://makecode.microbit.org/](https://makecode.microbit.org/) を開く
+* **新しいプロジェクト** をクリックしてください
+* ギアボタンメニューの中にある **拡張機能** をクリックしてください
+* **https://github.com/drkoukichi/vote-sync** を検索してインポートします。
+
+## このプロジェクトを編集します ![ビルド ステータス バッジ](https://github.com/drkoukichi/vote-sync/workflows/MakeCode/badge.svg)
+
+MakeCode でこのリポジトリを編集します。
+
+* [https://makecode.microbit.org/](https://makecode.microbit.org/) を開く
+* **読み込む** をクリックし、 **URLから読み込む...** をクリックしてください
+* **https://github.com/drkoukichi/vote-sync** を貼り付けてインポートをクリックしてください
+
+## ブロックのプレビュー
+
+この画像はマスター内の最後のコミットからのブロックコードを示しています。
+このイメージは更新に数分かかる場合があります。
+
+![生成されたブロック](https://github.com/drkoukichi/vote-sync/raw/master/.github/makecode/blocks.png)
+
+#### メタデータ (検索、レンダリングに使用)
+
+* for PXT/microbit
+<script src="https://makecode.com/gh-pages-embed.js"></script><script>makeCodeRender("{{ site.makecode.home_url }}", "{{ site.github.owner_name }}/{{ site.github.repository_name }}");</script>
+
 > b:選択肢の数を送信 (2〜5の整数)
 > c:予約(機能追加時に使う現状は0で送信する)
 
