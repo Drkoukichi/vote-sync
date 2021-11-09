@@ -15,7 +15,9 @@ function changeint (i : string){
     reserve = parseFloat(t)
 }
 
-function sendradio()
+function sendradio(){
+    
+}
 
 function setans(){
     
