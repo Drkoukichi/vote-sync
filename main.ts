@@ -7,7 +7,7 @@ let checkID = 0
 
 //内部データ
 let group = 25
-let canreceive = true
+let canreceive = false
 let mode = 0
 
 //選択肢
@@ -50,9 +50,10 @@ function resend (){
 radio.onReceivedString(function(received: string) {
     if(canreceive){
         changeint(received)
+        setrand()
     }
 
-    if (mode == 1){
+    if (mode == 2){
         if(protocol == 1){
             votelist[votedate]++
             checklist.push(checkID)
@@ -62,10 +63,10 @@ radio.onReceivedString(function(received: string) {
 
 //送信ライン
 function sendline(){
-    if (mode == 0){
+    if (mode == 1){
         sendradio(0,qestion,0)
 
-    }else if(mode = 1){
+    }else if(mode = 2){
         resend()
     }
 }
@@ -73,25 +74,37 @@ function sendline(){
 //Aを押したとき
 input.onButtonPressed(Button.A, function() {
     if (mode==0){
-        qestion++
+        if(qestion<5){
+            qestion++
+        }else if(qestion==5){
+            qestion = 0
+        }
     }else if (mode == 0){
 
     }
 })
-
+//AB押した時
 input.onButtonPressed(Button.AB,function(){
     if (mode==0){
         mode++
     }else{
-        mode--
+        mode = 0
     }
 })
 
 //動作ライン
 radio.setGroup(group)
 basic.forever(function () {
-    while (mode = 0){
+    while (mode == 0){
         basic.showNumber(qestion)
     }
-	
+	basic.showString("star vote")
+    basic.showIcon(1)
+    mode++
+    if(mode==1){
+        sendline()
+        mode++
+        canreceive=true
+    }
+    sendline() 
 })
