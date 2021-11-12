@@ -72,12 +72,20 @@ function sendline(){
 
 //Aを押したとき
 input.onButtonPressed(Button.A, function() {
-
-})
     if (mode==0){
+        qestion++
+    }else if (mode == 0){
 
     }
-}
+})
+
+input.onButtonPressed(Button.AB,function(){
+    if (mode==0){
+        mode++
+    }else{
+        mode--
+    }
+})
 
 //動作ライン
 radio.setGroup(group)
