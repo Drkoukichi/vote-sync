@@ -88,7 +88,6 @@ input.onButtonPressed(Button.AB,function(){
     if (mode==0){
         mode++
     }else{
-        mode = 0
     }
 })
 
@@ -99,12 +98,15 @@ basic.forever(function () {
         basic.showNumber(qestion)
     }
 	basic.showString("star vote")
+    basic.clearScreen()
     basic.showIcon(1)
-    mode++
     if(mode==1){
         sendline()
         mode++
         canreceive=true
     }
-    sendline() 
+    while(mode == 2){
+        sendline()
+    }
+
 })
