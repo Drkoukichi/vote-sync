@@ -18,7 +18,7 @@ let checklist = [0]
 let votecount = 0
 
 
-//受信後に関数に変換
+//受信後に数字型に変換
 function changeint (i : string){
     let t : string
     t = receivedate.substr(0,1)
@@ -36,8 +36,14 @@ function sendradio(a : number , b : number , c : number){
     radio.sendString(send)
 }
 
-function setans(){
-    
+//送信乱数保管用
+function setrand(){
+    checklist.push(checkID)
+}
+
+//乱数返却
+function resend (){
+    sendradio(3,checklist.pop(),0)
 }
 
 //受信ライン
@@ -60,12 +66,24 @@ function sendline(){
         sendradio(0,qestion,0)
 
     }else if(mode = 1){
-        sendradio(2,checklist.pop(),0)
+        resend()
+    }
+}
+
+//Aを押したとき
+input.onButtonPressed(Button.A, function() {
+
+})
+    if (mode==0){
+
     }
 }
 
 //動作ライン
 radio.setGroup(group)
 basic.forever(function () {
+    while (mode = 0){
+        basic.showNumber(qestion)
+    }
 	
 })
