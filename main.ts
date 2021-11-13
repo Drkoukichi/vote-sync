@@ -34,7 +34,7 @@ function changeint (i : string){
 function sendradio(a : number , b : number , c : number){
     let send : string
     send = a.toString()+b.toString()+c.toString()
-    radio.sendString(send)
+    bluetooth.uartWriteLine(send)
 }
 
 //送信乱数保管用
@@ -48,19 +48,9 @@ function resend (){
 }
 
 //受信ライン
-radio.onReceivedString(function(received: string) {
-    if(canreceive){
-        changeint(received)
-        setrand()
-    }
-
-    if (mode == 2){
-        if(protocol == 1){
-            votelist[votedate]++
-            checklist.push(checkID)
-        }
-    }
-})
+function getnewinfo(){
+    bluetooth.uartReadUntil(serial.delimiters(Delimiters.NewLine))
+}
 
 //送信ライン
 function sendline(){
@@ -100,7 +90,7 @@ input.onButtonPressed(Button.AB,function(){
 
 
 //動作ライン
-radio.setGroup(group)
+bluetooth.startUartService()
 basic.forever(function () {
     while (mode == 0){
         basic.showNumber(qestion)
