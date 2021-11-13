@@ -11,9 +11,10 @@ let canreceive = false
 let mode = 0
 
 //選択肢
-let qestion = 0
+let qestion = 2
 //投票データ
 let votelist = [0,0,0,0,0]
+let votename = ["A","B","C","D"]
 let checklist = [0]
 let votecount = 0
 
@@ -77,7 +78,7 @@ input.onButtonPressed(Button.A, function() {
         if(qestion<5){
             qestion++
         }else if(qestion==5){
-            qestion = 0
+            qestion = 2
         }
     }else if (mode == 0){
 
@@ -87,7 +88,10 @@ input.onButtonPressed(Button.A, function() {
 input.onButtonPressed(Button.AB,function(){
     if (mode==0){
         mode++
-    }else{
+    }else if (mode == 3){
+        canreceive = false
+        basic.showString("END VOTE")
+        basic.clearScreen()
     }
 })
 
@@ -97,16 +101,23 @@ basic.forever(function () {
     while (mode == 0){
         basic.showNumber(qestion)
     }
-	basic.showString("star vote")
+	basic.showString("START VOTE")
     basic.clearScreen()
-    basic.showIcon(1)
     if(mode==1){
         sendline()
         mode++
         canreceive=true
     }
     while(mode == 2){
+        let i = 0
         sendline()
+        while (qestion >= i+1){
+            basic.showString(votename[i])
+            basic.pause(1000)
+            basic.showNumber(votelist[i])
+            basic.pause(1500)
+            i++
+        }
     }
 
 })
