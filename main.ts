@@ -85,15 +85,19 @@ input.onButtonPressed(Button.A, function() {
     }
 })
 //AB押した時
-input.onButtonPressed(Button.AB,function(){
-    if (mode==0){
+function makeAB(){
+    if (mode == 0) {
         mode++
-    }else if (mode == 3){
+    } else if (mode == 3) {
         canreceive = false
         basic.showString("END VOTE")
         basic.clearScreen()
     }
+}
+input.onButtonPressed(Button.AB,function(){
+    makeAB()
 })
+
 
 //動作ライン
 radio.setGroup(group)
@@ -117,7 +121,11 @@ basic.forever(function () {
             basic.showNumber(votelist[i])
             basic.pause(1500)
             i++
+            if(input.buttonIsPressed(Button.AB)){
+            break;
+            }
         }
     }
+    makeAB()
 
 })
