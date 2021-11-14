@@ -72,6 +72,8 @@ function sendline(){
     }
 }
 
+//結果表示ライン
+
 //Aを押したとき
 input.onButtonPressed(Button.A, function() {
     if (mode==0){
@@ -90,7 +92,7 @@ function makeAB(){
         mode++
     } else if (mode >= 3) {
         canreceive = false
-        basic.showString("END VOTE")
+        basic.showString("VOTE END")
         basic.clearScreen()
     }
 }
@@ -105,7 +107,7 @@ basic.forever(function () {
     while (mode == 0){
         basic.showNumber(qestion)
     }
-	basic.showString("START VOTE")
+	basic.showString("VOTE ST")
     basic.clearScreen()
     if(mode==1){
         sendline()
@@ -121,11 +123,12 @@ basic.forever(function () {
             basic.showNumber(votelist[i])
             basic.pause(1500)
             i++
-            if(input.buttonIsPressed(Button.AB)){
+            if(input.buttonIsPressed(Button.B)){
                 mode ++
             break;
             }
         }
+    
     }
     makeAB()
 
