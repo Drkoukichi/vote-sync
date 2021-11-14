@@ -88,7 +88,7 @@ input.onButtonPressed(Button.A, function() {
 function makeAB(){
     if (mode == 0) {
         mode++
-    } else if (mode == 3) {
+    } else if (mode >= 3) {
         canreceive = false
         basic.showString("END VOTE")
         basic.clearScreen()
@@ -122,6 +122,7 @@ basic.forever(function () {
             basic.pause(1500)
             i++
             if(input.buttonIsPressed(Button.AB)){
+                mode ++
             break;
             }
         }
