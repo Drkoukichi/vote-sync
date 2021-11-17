@@ -82,39 +82,29 @@ input.onButtonPressed(Button.A, function() {
         }else if(qestion==5){
             qestion = 2
         }
-    }else if (mode == 0){
-
     }
 })
 //AB押した時
-function makeAB(){
-    if (mode == 0) {
-        mode++
-    } else if (mode >= 3) {
-        canreceive = false
-        basic.showString("VOTE END")
-        basic.clearScreen()
-    }
-}
-input.onButtonPressed(Button.AB,function(){
-    makeAB()
-})
 
 
 //動作ライン
 radio.setGroup(group)
 basic.forever(function () {
-    while (mode == 0){
+    while (input.buttonIsPressed(Button.AB)==true){
         basic.showNumber(qestion)
     }
 	basic.showString("VOTE ST")
     basic.clearScreen()
+    mode = 1
     if(mode==1){
         sendline()
         mode++
         canreceive=true
+        basic.pause(2000)
+        mode = 2
     }
-    while(mode == 2){
+    while(input.buttonIsPressed(Button.B)==false){
+        mode
         let i = 0
         sendline()
         while (qestion >= i+1){
@@ -123,13 +113,11 @@ basic.forever(function () {
             basic.showNumber(votelist[i])
             basic.pause(1500)
             i++
-            if(input.buttonIsPressed(Button.B)){
-                mode ++
-            break;
-            }
+            
         }
+        mode = 3
+        basic.showString("VT END")
     
     }
-    makeAB()
 
 })
