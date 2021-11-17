@@ -9,12 +9,13 @@ let checkID = 0
 let group = 25
 let canreceive = false
 let mode = 0
+let i = 0
 
 //選択肢
-let qestion = 2
+let qestion = 1
 //投票データ
 let votelist = [0,0,0,0,0]
-let votename = ["A","B","C","D"]
+let votename = ["A","B","C","D","E"]
 let checklist = [0]
 let votecount = 0
 
@@ -37,11 +38,6 @@ function sendradio(a : number , b : number , c : number){
     radio.sendString(send)
 }
 
-//送信乱数保管用
-function setrand(){
-    checklist.push(checkID)
-}
-
 //乱数返却
 function resend (){
     sendradio(3,checklist.pop(),0)
@@ -51,7 +47,6 @@ function resend (){
 radio.onReceivedString(function(received: string) {
     if(canreceive){
         changeint(received)
-        setrand()
     }
 
     if (mode == 2){
@@ -62,62 +57,55 @@ radio.onReceivedString(function(received: string) {
     }
 })
 
-//送信ライン
-function sendline(){
-    if (mode == 1){
-        sendradio(0,qestion,0)
-
-    }else if(mode = 2){
-        resend()
-    }
-}
-
 //結果表示ライン
 
 //Aを押したとき
-input.onButtonPressed(Button.A, function() {
-    if (mode==0){
-        if(qestion<5){
-            qestion++
-        }else if(qestion==5){
-            qestion = 2
+input.onButtonPressed(Button.A,function(){
+    if (mode == 0){
+        if (qestion == 4){
+            qestion = 1
+        }else{
+            qestion ++
         }
     }
 })
+
 //AB押した時
 
 
 //動作ライン
 radio.setGroup(group)
-basic.forever(function () {
-    while (input.buttonIsPressed(Button.AB)==true){
-        basic.showNumber(qestion)
+while(!input.buttonIsPressed(Button.AB)){
+    basic.showNumber(qestion + 1)
+}
+basic.clearScreen()
+basic.pause(500)
+mode = 1
+basic.showString("OK")
+basic.pause(500)
+basic.showString("START")
+basic.clearScreen()
+//初期化通信実行
+sendradio(0,qestion,0)
+mode = 2
+canreceive = true
+while(!input.buttonIsPressed(Button.AB)){
+    i = 0
+    while(i<=qestion){
+        basic.showString(votename[i])
+        basic.pause(1000)
+        basic.showNumber(votelist[i])
+        basic.pause(1500)
+        i++
+        resend()
     }
-	basic.showString("VOTE ST")
-    basic.clearScreen()
-    mode = 1
-    if(mode==1){
-        sendline()
-        mode++
-        canreceive=true
-        basic.pause(2000)
-        mode = 2
-    }
-    while(input.buttonIsPressed(Button.B)==false){
-        mode
-        let i = 0
-        sendline()
-        while (qestion >= i+1){
-            basic.showString(votename[i])
-            basic.pause(1000)
-            basic.showNumber(votelist[i])
-            basic.pause(1500)
-            i++
-            
-        }
-        mode = 3
-        basic.showString("VT END")
-    
-    }
+}
+basic.clearScreen()
+canreceive = false
+while(checklist.length != 0){
+    resend()
+}
 
-})
+mode = 3
+
+basic.showString("END")
