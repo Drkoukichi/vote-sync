@@ -75,10 +75,10 @@ input.onButtonPressed(Button.A,function(){
 
 //動作ライン
 radio.setGroup(group)
-while(!input.buttonIsPressed(Button.AB)){
-    led.plot(3,3)
+while(!input.buttonIsPressed(Button.B)){
+    led.plot(4,2)
 }
-led.unplot(3,3)
+led.unplot(2,2)
 while(!input.buttonIsPressed(Button.AB)){
     basic.showNumber(qestion + 1)
 }
