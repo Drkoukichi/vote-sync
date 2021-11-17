@@ -93,9 +93,9 @@ while(!input.buttonIsPressed(Button.AB)){
     i = 0
     while(i<=qestion){
         basic.showString(votename[i])
-        basic.pause(1000)
+        basic.pause(500)
         basic.showNumber(votelist[i])
-        basic.pause(1500)
+        basic.pause(1000)
         i++
         resend()
     }
