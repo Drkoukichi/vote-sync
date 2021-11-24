@@ -27,8 +27,7 @@ function changeint (i : string){
     protocol = parseFloat(t)
     t = receivedate.substr(1,1)
     votedate = parseFloat(t)
-    t = receivedate.substr(2,1)
-    checkID = parseFloat(t)
+    checkID = radio.receivedSerial()
 }
 
 //コマンド送信関数
